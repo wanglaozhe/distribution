@@ -1,0 +1,64 @@
+server:
+  port: 80
+  context-path: /
+  tomcat:
+    uri-encoding: UTF-8
+
+spring:
+  datasource1:
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root
+    driverClassName: com.mysql.jdbc.Driver
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000  #配置获取连接等待超时的时间
+    timeBetweenEvictionRunsMillis: 60000  #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒  
+    minEvictableIdleTimeMillis: 300000  #配置一个连接在池中最小生存的时间，单位是毫秒  
+    validationQuery: SELECT  1  FROM  DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true  #打开PSCache，并且指定每个连接上PSCache的大小  
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j    #配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+    connectionProperties: druid.stat.mergeSql:true;druid.stat.slowSqlMillis:5000    #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    useGlobalDataSourceStat: true    #合并多个DruidDataSource的监控数据
+  
+#JPA  Configuration
+  jpa:
+    database: MYSQL
+    showSql: true
+    generateDdl: true    
+    hibernateDdlAuto: update    #Hibernate  ddl  auto  (create,  create-drop,  update)
+    databasePlatform: org.hibernate.dialect.MySQL5Dialect    
+    hibernateNamingStrategy: org.hibernate.cfg.ImprovedNamingStrategy    
+    hibernateDialect: org.hibernate.dialect.MySQL5Dialect  #spring.jpa.database:org.hibernate.dialect.MySQL5InnoDBDialect  
+  
+#springboot里默认上传文件大小限制，即10MB，  
+http:
+    multipart:
+      maxFileSize: 10Mb
+      maxRequestSize: 10Mb
+      uploadPathPrefix: D:/temp/
+      fileSystemBaseUrl: http://localhost/distribution-filesystem/
+
+#spring  security  配置
+securityconfig:
+  logoutsuccssurl: /
+  permitall: /images/**,/checkcode,/scripts/**,/styles/**,/api/**,/distribution-image/**  #不需要登录过滤的正则表达式配置
+  permitCrossDomainReqUrls: /api/weixin/,/file/   #允许不进行csrf校验的地址前缀
+  deniedpage: /deny
+  urlroles: /**/new/**=admin;/**/edit/**=admin,editor;/**/delete/** =admin
+
+#######微信小程序配置######
+weixin:
+  appid: testappid
+  appsecret: testappsecret
+  key: testkey      #key设置路径：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
+  mchId: testmchId    #商户id
+  
+  
+  

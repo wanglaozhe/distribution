@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorator="fragments/layout">
+<head>
+    <title>用户管理</title>
+    <script type="text/javascript">
+	    $(function () {
+	    	
+		    $("#btnSubmit").click(function (event) {
+		        //stop submit the form, we will post it manually.
+		        event.preventDefault();
+		        fire_ajax_submit();
+		    });
+	
+		});
+	
+		function fire_ajax_submit() {
+		    // Get form
+		    var form = $('#fileUploadForm')[0];
+		    var data = new FormData(form);
+		    data.append("CustomField", "This is some extra data, testing");
+		    $("#btnSubmit").prop("disabled", true);
+		    $.ajax({
+		        type: "POST",
+		       // enctype: 'multipart/form-data',
+		       //contentType: 'multipart/form-data',
+		       dataType: 'json',
+		        url: "/file/multiUpload.json",
+		        data: data,
+		        processData: false, //prevent jQuery from automatically transforming the data into a query string
+		        contentType: false,
+		        cache: false,
+		        timeout: 600000,
+		        success: function (data) {
+		            $("#result").text(JSON.stringify(data, null, 4));
+		            $("#btnSubmit").prop("disabled", false);
+	
+		        },
+		        error: function (e) {
+		            $("#result").text(e.responseText);
+		            console.log("ERROR : ", e);
+		            $("#btnSubmit").prop("disabled", false);
+	
+		        }
+		    });
+	
+		}
+    </script>
+</head>
+<body>
+	<div class="locationLine" layout:fragment="prompt">
+	    当前位置：首页 &gt; <em >测试上传</em>
+	</div>
+	<div class="statisticBox w-782"  layout:fragment="content">
+		<h2>Spring Boot多文件上传示例(使用AJAX)</h2>
+		<form  id="fileUploadForm">
+		    <input type="text" name="extraField"/><br/><br/>
+		    <input type="file" name="files"/><br/><br/>
+		    <input type="file" name="files"/><br/><br/>
+		    <input type="submit" value="提交" id="btnSubmit"/>
+		</form>
+		<h1>Ajax提交结果：</h1>
+		<pre>
+		    <span id="result"></span>
+		</pre>
+	</div>
+</body>
+</html>

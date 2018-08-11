@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" debug="true">
+	<property name="LOG_DIR" value="${catalina.base}/logs" />
+	
+	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
+		<file>./logs/distribution-web.log</file>
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n
+			</pattern>
+			<outputPatternAsHeader>true</outputPatternAsHeader>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+		</encoder>
+	</appender>
+
+<appender name="ROLLING_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <!-- daily rollover -->
+      <fileNamePattern>./logs/distribution-web.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+      <!-- keep 30 days' worth of history -->
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file : %line] %msg%n</pattern>
+    </encoder>
+  </appender> 
+    
+	<logger name="com.yuandong" additivity="false" level="INFO">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="ROLLING_FILE" />
+	</logger>
+	
+	<logger name="org.springframework.beans.TypeConverterDelegate">
+    	<level value="error" />
+	</logger>
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
+		<appender-ref ref="ROLLING_FILE" />
+	</root>
+</configuration>

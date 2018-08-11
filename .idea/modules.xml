@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/distribution.iml" filepath="$PROJECT_DIR$/distribution.iml" />
+      <module fileurl="file://$PROJECT_DIR$/distribution-core/distribution-core.iml" filepath="$PROJECT_DIR$/distribution-core/distribution-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/distribution-security/distribution-security.iml" filepath="$PROJECT_DIR$/distribution-security/distribution-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/distribution-web/distribution-web.iml" filepath="$PROJECT_DIR$/distribution-web/distribution-web.iml" />
+    </modules>
+  </component>
+</project>

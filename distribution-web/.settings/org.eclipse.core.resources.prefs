@@ -1,0 +1,17 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/templates/fragments/nav.html=UTF-8
+encoding//src/main/resources/templates/role/edit.html=UTF-8
+encoding//src/main/resources/templates/role/index.html=UTF-8
+encoding//src/main/resources/templates/role/new.html=UTF-8
+encoding//src/main/resources/templates/role/show.html=UTF-8
+encoding//src/main/resources/templates/testCkeditor.html=UTF-8
+encoding//src/main/resources/templates/ueditor.html=UTF-8
+encoding//src/main/resources/templates/user/edit.html=UTF-8
+encoding//src/main/resources/templates/user/index.html=UTF-8
+encoding//src/main/resources/templates/user/new.html=UTF-8
+encoding//src/main/resources/templates/user/show.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding//src/test/resources=UTF-8
+encoding/<project>=UTF-8
